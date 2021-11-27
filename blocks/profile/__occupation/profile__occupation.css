@@ -5,3 +5,10 @@
     color: #FFFFFF;
     margin: 0;
 }
+@media screen and (max-width: 768px) {
+    .profile__occupation {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+    }
+}

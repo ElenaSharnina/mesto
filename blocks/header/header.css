@@ -5,3 +5,14 @@
     margin: 0 auto;
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
+@media screen and (max-width: 768px) {
+    .header {
+    padding-top: 27px;
+    padding-left: 26px;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 980px) {
+    .header {
+        padding-left: 26px;
+    }
+}
