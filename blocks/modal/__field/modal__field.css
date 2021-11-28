@@ -1,6 +1,6 @@
 .modal__field {
     margin-bottom: 30px;
-    height: 27px;
+    min-height: 27px;
     border-bottom: 1px solid #000000;
     border-top: 0;
     border-left: 0;
