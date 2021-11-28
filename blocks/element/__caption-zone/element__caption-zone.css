@@ -8,3 +8,9 @@
     padding-right: 21px;
     padding-top: 25px;
 }
+@media screen and (min-width: 322px) and (max-width: 980px) {
+    .element__caption-zone {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
