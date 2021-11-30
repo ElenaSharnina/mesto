@@ -2,7 +2,7 @@
     display: flex;
     margin: 40px auto 0 auto;
     max-width: 880px;
-    position: relative;
+    justify-content: space-between;
 }
 @media screen and (max-width: 768px) {
     .profile {

@@ -1,9 +1,9 @@
 .modal__close-icon {
-    background-image: url(../../../images/Close\ Icon.png);
+    background-image: url(../../../images/closeicon.svg);
     background-size: cover;
     position: absolute;
     top: -41px;
-    right:-41px;
+    right: -41px;
     width: 30px;
     height: 30px;
     border: 0;
@@ -11,12 +11,12 @@
 }
 .modal__close-icon:hover {
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 @media screen and (max-width: 768px) {
     .modal__close-icon {
-    width: 20px;
-    height: 20px;
-    right: 0;
+        width: 20px;
+        height: 20px;
+        right: 0;
     }
 }

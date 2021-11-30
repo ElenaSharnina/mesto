@@ -7,6 +7,8 @@
     text-align: center;
     color: #FFFFFF;
     margin-top: 18px;
+    border: none;
+    border-radius: 2px;
 }
 .modal__button:hover {
     cursor: pointer;

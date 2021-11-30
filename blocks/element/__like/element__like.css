@@ -1,5 +1,5 @@
 .element__like {
-    background-image: url(../../../images/like.png);
+    background-image: url(../../../images/like.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -10,8 +10,8 @@
 }
 .element__like:hover {
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 .element__like:focus {
-    background-image: url(../../../images/Union.png);
+    background-image: url(../../../images/darklike.svg);
 }

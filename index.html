@@ -15,20 +15,24 @@
 <body>
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/Vector.png" alt="Логотип Mesto">
+            <img class="header__logo" src="./images/logo.svg" alt="Логотип Mesto">
         </header>
         <main class="main">
             <section class="profile">
-                <div class="profile__avatar">
-                    <img class="profile__foto" src="./images/image.jpg" alt="Фото профиля">
-                </div>
-                <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button"></button>
-                    <p class="profile__occupation">Исследователь океана</p>
-                </div>
+                <div class="profile__section">
+                    <div class="profile__avatar">
+                        <img class="profile__foto" src="./images/image.jpg" alt="Фото профиля">
+                    </div>
+                    <div class="profile__info">
+                        <div class="profile__editing">
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <button type="button" class="profile__edit-button"></button>
+                        </div>
+                        <p class="profile__occupation">Исследователь океана</p>
 
-                <button class="profile__add-button"></button>
+                    </div>
+                </div>
+                <button type="button" class="profile__add-button"></button>
             </section>
             <section class="elements">
                 <div class="element">
@@ -36,43 +40,43 @@
                             src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Фотография Карачевск"></div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Карачевск</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element__foto-zone"><img class="element__image"
-                            src="./images/kirill-pershin-1404681-unsplash.png" alt="Фотография Гора Эльбрус"></div>
+                            src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Фотография Гора Эльбрус"></div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element__foto-zone"><img class="element__image"
-                            src="./images/kirill-pershin-1556355-unsplash.png" alt="Фотография Домбай"></div>
+                            src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Фотография Домбай"></div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Домбай</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element__foto-zone">
-                        <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.png"
+                        <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg"
                             alt="Фотография Гора Эльбрус">
                     </div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element__foto-zone">
-                        <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.png"
+                        <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg"
                             alt="Фотография Домбай">
                     </div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Домбай</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
@@ -82,20 +86,23 @@
                     </div>
                     <div class="element__caption-zone">
                         <h2 class="element__name">Карачаево-Черкессия</h2>
-                        <button class="element__like"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
             </section>
-            <section class="modal">
-                
-                <form class="modal__form">
-                    <button class="modal__close-icon"></button>
-                    <h2 class="modal__title">Редактировать профиль</h2>
-                    <input type="text" class="modal__field modal__name-field" value="Жак-Ив Кусто">
-                    <input type="text" class="modal__field modal__occupation-field" value="Исследователь океана">
-                    <button class="modal__button">Сохранить</button>
-                </form>
-            </section>
+            <div class="modal">
+                <div class="modal__container">
+                    <button type="button" class="modal__close-icon"></button>
+                    <form class="modal__form" name="regform">
+                        <h2 class="modal__title">Редактировать профиль</h2>
+                        <input type="text" class="modal__field modal__field_name" value="" name="username"
+                            placeholder="Ваше имя" required>
+                        <input type="text" class="modal__field modal__field_occupation" value="" name="userjob"
+                            placeholder="Расскажите о себе" required>
+                        <button type="submit" class="modal__button">Сохранить</button>
+                    </form>
+                </div>
+            </div>
 
         </main>
         <footer class="footer">

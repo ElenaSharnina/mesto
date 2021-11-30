@@ -1,14 +1,14 @@
 .profile__add-button {
-    position: absolute;
-    top: 35px;
-    right: 0;
+    align-self: center;
+    justify-self: end;
     box-sizing: border-box;
     width: 150px;
     height: 50px;
     border: 2px solid #ffffff;
+    border-radius: 2px;
     background-color: transparent;
     padding: 0;
-    background-image: url(../../../images/Vector1.png);
+    background-image: url(../../../images/add.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -18,12 +18,7 @@
 }
 @media screen and (max-width: 768px) {
     .profile__add-button {
-        position: static;
         width: 100%;
-    }
-}
-@media screen and (min-width: 769px) and (max-width: 980px) {
-    .profile__add-button {
-        right: 19px;
+        background-size: 16px 16px;
     }
 }
