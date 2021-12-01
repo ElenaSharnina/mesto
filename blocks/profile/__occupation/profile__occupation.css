@@ -5,15 +5,20 @@
     color: #FFFFFF;
     margin: 0;
     text-overflow: ellipsis;
-    max-width: 300px;
+    max-width: 450px;
     overflow: hidden;
     white-space: nowrap;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 860px) {
+    .profile__occupation {
+        max-width: 350px;
+    }
+}
+@media screen and (max-width: 500px) {
     .profile__occupation {
         font-size: 14px;
         line-height: 17px;
         text-align: center;
-        max-width: 300px;
+        max-width: 200px;
     }
 }
