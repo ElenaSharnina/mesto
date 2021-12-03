@@ -9,6 +9,8 @@
     margin-top: 18px;
     border: none;
     border-radius: 2px;
+    padding: 0;
+    box-sizing: border-box;
 }
 .modal__button:hover {
     cursor: pointer;
@@ -18,5 +20,6 @@
     .modal__button {
         font-size: 14px;
         line-height: 17px;
+        margin-top: 15px;
     }
 }
