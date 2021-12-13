@@ -36,65 +36,25 @@
                 <button type="button" class="profile__add-button" aria-label="Добавить фотографию"></button>
             </section>
             <section class="elements">
-                <div class="element">
-                    <div class="element__foto-zone"><img class="element__image"
-                            src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Фотография Карачевск"></div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Карачевск</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
+                <template id="element">
+                    <div class="element">
+                        <div class="element__foto-zone">
+                            <img class="element__image" src="" alt="">
+                            <button type="button" class="element__delete" aria-label="Удалить"></button>
+                        </div>
+                        <div class="element__caption-zone">
+                            <h2 class="element__name"></h2>
+                            <button type="button" class="element__like" aria-label="Нравится"></button>
+
+                        </div>
                     </div>
-                </div>
-                <div class="element">
-                    <div class="element__foto-zone"><img class="element__image"
-                            src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Фотография Гора Эльбрус"></div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Гора Эльбрус</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="element__foto-zone"><img class="element__image"
-                            src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Фотография Домбай"></div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Домбай</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="element__foto-zone">
-                        <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg"
-                            alt="Фотография Гора Эльбрус">
-                    </div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Гора Эльбрус</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="element__foto-zone">
-                        <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg"
-                            alt="Фотография Домбай">
-                    </div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Домбай</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="element__foto-zone">
-                        <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg"
-                            alt="Фотография Карачевск">
-                    </div>
-                    <div class="element__caption-zone">
-                        <h2 class="element__name">Карачаево-Черкессия</h2>
-                        <button type="button" class="element__like" aria-label="Нравится"></button>
-                    </div>
-                </div>
+                </template>
             </section>
             <div class="modal">
                 <div class="modal__container">
-                    <button type="button" class="modal__close-icon" aria-label="Закрыть"></button>
-                    <form class="modal__form" name="regform">
+                    <button type="button" class="modal__close-icon modal__close-icon_place_regform"
+                        aria-label="Закрыть"></button>
+                    <form class="modal__form modal__form_place_regform" name="regform">
                         <h2 class="modal__title">Редактировать профиль</h2>
                         <input type="text" class="modal__field modal__field_type_name" value="" name="username"
                             placeholder="Ваше имя" required>
@@ -104,7 +64,28 @@
                     </form>
                 </div>
             </div>
-
+            <div class="modalpic modal">
+                <div class="modal__container">
+                    <button type="button" class="modal__close-icon modal__close-icon_place_modalpic"
+                        aria-label="Закрыть"></button>
+                    <form class="modal__form modal__form_place_modalpic" name="picform">
+                        <h2 class="modal__title">Новое место</h2>
+                        <input type="text" class="modal__field modal__field_type_card-name" value="" name="cardname"
+                            placeholder="Название" required>
+                        <input type="url" class="modal__field modal__field_type_card-link" value="" name="cardlink"
+                            placeholder="Ссылка на картинку" required>
+                        <button type="submit" class="modal__button modal__button_type_create">Создать</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-card modal">
+                <figure class="modal-card__container">
+                    <button type="button" class="modal__close-icon modal__close-icon_place_modal-card"
+                        aria-label="Закрыть"></button>
+                    <img class="modal-card__image" src="" alt="Фотография">
+                    <figcaption class="modal-card__label"></figcaption>
+                </figure>
+            </div>
         </main>
         <footer class="footer">
             <p class="footer__text">© 2021 Mesto Russia</p>

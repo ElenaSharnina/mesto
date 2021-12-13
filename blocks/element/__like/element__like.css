@@ -12,6 +12,4 @@
     cursor: pointer;
     opacity: 0.5;
 }
-.element__like:focus {
-    background-image: url(../../../images/darklike.svg);
-}
+
