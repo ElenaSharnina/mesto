@@ -19,19 +19,23 @@ const picLink = document.querySelector('.modal__field_type_card-link');
 const picContainer = document.querySelector('.elements');
 const picTemplate = document.querySelector('#element').content;
 
+//функция открытия модального окна редактирования профиля
 
-nameInput.value = username.textContent;
-jobInput.value = userjob.textContent;
+function openPopupEditProfile() {
+  openModal(modalEdit);
+  nameInput.value = username.textContent;
+  jobInput.value = userjob.textContent;
+}
 
 //функция открытия модального окна
 
-function openModal (popup) {
-  popup.classList.add('modal_active');    
+function openModal(popup) {
+  popup.classList.add('modal_active');
 }
 
 //value для того чтобы без обновления страницы выходила пустая форма
 
-function openAddModal () {
+function openAddModal() {
   openModal(modalpic);
   picName.value = '';
   picLink.value = '';
@@ -54,27 +58,34 @@ function formSubmitHandler(evt) {
 
 //выводим карточки на страницу из массива
 
-function addCards (item) {
-  picContainer.append(item);
+function addCard(item) {
+  picContainer.prepend(item);
 }
 
-function createCard (item) {
-  const picElement = picTemplate.querySelector('.element').cloneNode(true);
+function createCard(item) {
+  const picElement = picTemplate.cloneNode(true);
   picElement.querySelector('.element__name').textContent = item.name;
   picElement.querySelector('.element__image').src = item.link;
-  picElement.querySelector('.element__image').alt = item.name;
-  picContainer.addEventListener('click', deleteElement); //удаляем картинку
-  picContainer.addEventListener('click', modalImageOpen); //открытие модального окна у картинки
-  picContainer.addEventListener('click', likeActive); //лайк карточки
+  picElement.alt = item.name;
+
+  picElement.querySelector('.element__delete').addEventListener('click', deleteElement); //удаляем картинку
+
+  picElement.querySelector('.element__image').addEventListener('click', () => { //открытие модального окна у картинки
+    modalLabel.textContent = item.name;
+    modalImage.src = item.link;
+    openModal(modalCard);
+  })
+
+  picElement.querySelector('.element__like').addEventListener('click', likeActive); //лайк карточки
   return picElement;
 }
 
-function selectionCard (array) { //отбираем элементы из массива
-  array.forEach((item) => 
-  addCards (createCard (item)));
+function renderCards(array) { //отбираем элементы из массива
+  array.forEach((item) =>
+    addCard(createCard(item)));
 }
-selectionCard(initialCards);
-   
+renderCards(initialCards);
+
 // добавление карточки из формы
 
 function formSubmitNewCard(evt) {
@@ -83,47 +94,25 @@ function formSubmitNewCard(evt) {
     name: picName.value,
     link: picLink.value
   }
-  addCards(createCard(picElement));
-  picContainer.addEventListener('click', deleteElement);
-  picContainer.addEventListener('click', likeActive);
-  picContainer.addEventListener('click', modalImageOpen);
+  addCard(createCard(picElement));
   closeModal(modalpic);
 }
 
 //like карточки
 
-function likeActive (evt) {
-  const evtLike = evt.target;
-  if (evt.target.classList.contains('element__like')) {
-  evtLike.classList.toggle('element__like_active');
-  }
+function likeActive(evt) {
+  evt.target.classList.toggle('element__like_active');
 }
-
-// открытие модального окна для карточки
-
-function modalImageOpen (evt) {
-  const evtImage = evt.target;
-  if (evtImage.classList.contains('element__image')) {
-    modalLabel.textContent = evtImage.alt;
-    modalImage.src = evtImage.src;
-    modalImage.alt = evtImage.alt;
-    openModal(modalCard);
-  }
-}
-  
 
 // удаление Элемента
 
-function deleteElement (evt) {
-  const evtDelete = evt.target;
-  if (evtDelete.classList.contains('element__delete')) {
-    evt.target.closest('.element').remove();
-  }
+function deleteElement(evt) {
+  evt.target.closest('.element').remove();
 }
 
 
 formElementPic.addEventListener('submit', formSubmitNewCard);
-buttonEdit.addEventListener('click', () => openModal(modalEdit));
+buttonEdit.addEventListener('click', () => openPopupEditProfile());
 formElement.addEventListener('submit', formSubmitHandler);
 closeButtonReg.addEventListener('click', () => closeModal(modalEdit));
 closeButtonPic.addEventListener('click', () => closeModal(modalpic));
