@@ -22,9 +22,9 @@ const picTemplate = document.querySelector('#element').content;
 //функция открытия модального окна редактирования профиля
 
 function openPopupEditProfile() {
-  openModal(modalEdit);
   nameInput.value = username.textContent;
   jobInput.value = userjob.textContent;
+  openModal(modalEdit);
 }
 
 //функция открытия модального окна
@@ -64,15 +64,17 @@ function addCard(item) {
 
 function createCard(item) {
   const picElement = picTemplate.cloneNode(true);
+  const image = picElement.querySelector('.element__image');
   picElement.querySelector('.element__name').textContent = item.name;
-  picElement.querySelector('.element__image').src = item.link;
-  picElement.alt = item.name;
+  image.src = item.link;
+  image.alt = item.name;
 
   picElement.querySelector('.element__delete').addEventListener('click', deleteElement); //удаляем картинку
 
-  picElement.querySelector('.element__image').addEventListener('click', () => { //открытие модального окна у картинки
+  image.addEventListener('click', () => { //открытие модального окна у картинки
     modalLabel.textContent = item.name;
     modalImage.src = item.link;
+    modalImage.alt = item.name;
     openModal(modalCard);
   })
 
