@@ -1,8 +1,9 @@
+const body = document.querySelector('body');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
 const closeButtonReg = document.querySelector('.modal__close-icon_place_regform');
 const closeButtonPic = document.querySelector('.modal__close-icon_place_modalpic');
-const formElement = document.querySelector('.modal__form_place_regform');
+const formElem = document.querySelector('.modal__form_place_regform');
 const formElementPic = document.querySelector('.modal__form_place_modalpic');
 const nameInput = document.querySelector('.modal__field_type_name');
 const jobInput = document.querySelector('.modal__field_type_occupation');
@@ -19,6 +20,7 @@ const picLink = document.querySelector('.modal__field_type_card-link');
 const picContainer = document.querySelector('.elements');
 const picTemplate = document.querySelector('#element').content;
 
+
 //функция открытия модального окна редактирования профиля
 
 function openPopupEditProfile() {
@@ -31,6 +33,10 @@ function openPopupEditProfile() {
 
 function openModal(popup) {
   popup.classList.add('modal_active');
+  body.classList.add('page-js');
+  popup.addEventListener('click', closeModalByOverlay);
+  document.addEventListener('keydown', closeModalByESC);
+
 }
 
 //value для того чтобы без обновления страницы выходила пустая форма
@@ -45,6 +51,23 @@ function openAddModal() {
 
 function closeModal(popup) {
   popup.classList.remove('modal_active');
+  body.classList.remove('page-js');
+}
+
+//Функция закрытия модальных окон по ESC
+
+function closeModalByESC(evt) {
+  if (evt.key === 'Escape') {
+    closeModal(document.querySelector('.modal_active'));
+  }
+}
+
+//Функция закрытия модальных по клику по оверлею
+
+function closeModalByOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.target);
+  }
 }
 
 //функция отправки формы профиля
@@ -115,7 +138,7 @@ function deleteElement(evt) {
 
 formElementPic.addEventListener('submit', formSubmitNewCard);
 buttonEdit.addEventListener('click', () => openPopupEditProfile());
-formElement.addEventListener('submit', formSubmitHandler);
+formElem.addEventListener('submit', formSubmitHandler);
 closeButtonReg.addEventListener('click', () => closeModal(modalEdit));
 closeButtonPic.addEventListener('click', () => closeModal(modalpic));
 addButton.addEventListener('click', () => openAddModal());
