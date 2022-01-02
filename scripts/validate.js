@@ -48,20 +48,16 @@ const checkInputValidity = (formElement, inputElement) => {
 
 };
 
-
-
 //функция стилизации кнопки
 
 const toggleButtonState = (inputList, buttonElement) => {
 
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationList.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true); //делаем кнопку неактивной
+    //делаем кнопку неактивной
   } else {
     buttonElement.classList.remove(validationList.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
   }
-
 };
 
 //добавляем слушателя всем элементам

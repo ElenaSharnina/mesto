@@ -17,6 +17,10 @@ const modalLabel = document.querySelector('.modal-card__label');
 const modalCardCloseBtn = document.querySelector('.modal__close-icon_place_modal-card');
 const picName = document.querySelector('.modal__field_type_card-name');
 const picLink = document.querySelector('.modal__field_type_card-link');
+const inputsListProfile = [jobInput, jobInput];
+const inputsListAddCard = [picName, picLink];
+const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
+const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
 const picContainer = document.querySelector('.elements');
 const picTemplate = document.querySelector('#element').content;
 
@@ -27,6 +31,8 @@ function openPopupEditProfile() {
   nameInput.value = username.textContent;
   jobInput.value = userjob.textContent;
   openModal(modalEdit);
+  validModalForm(modalEdit);
+  toggleButtonState(inputsListProfile, btnSubmitProfile);
 }
 
 //функция открытия модального окна
@@ -36,13 +42,21 @@ function openModal(popup) {
   body.classList.add('page-js');
   popup.addEventListener('click', closeModalByOverlay);
   document.addEventListener('keydown', closeModalByESC);
-
 }
 
+function validModalForm(popup) {
+  const form = popup.querySelector('.modal__form');
+  const inputList = form.querySelectorAll('.modal__field');
+  inputList.forEach((input) => {
+    hideInputError(form, input);
+  });
+}
 //value для того чтобы без обновления страницы выходила пустая форма
 
 function openAddModal() {
   openModal(modalpic);
+  toggleButtonState(inputsListAddCard, btnSubmitAddCard);
+  validModalForm(modalpic);
   picName.value = '';
   picLink.value = '';
 }
@@ -52,6 +66,8 @@ function openAddModal() {
 function closeModal(popup) {
   popup.classList.remove('modal_active');
   body.classList.remove('page-js');
+  document.removeEventListener('keydown', closeModalByESC);
+  validModalForm(popup);
 }
 
 //Функция закрытия модальных окон по ESC
