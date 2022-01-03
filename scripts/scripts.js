@@ -40,14 +40,6 @@ function openModal(popup) {
   document.addEventListener('keydown', closeModalByESC);
 }
 
-//value для того чтобы без обновления страницы выходила пустая форма
-
-function openAddModal() {
-  openModal(modalpic);
-  picName.value = '';
-  picLink.value = '';
-  btnSubmitAddCard.classList.add('modal__button_disabled'); //кнопка при открытии неактивна
-}
 
 //функция закрытия модального окна
 
@@ -55,7 +47,7 @@ function closeModal(popup) {
   popup.classList.remove('modal_active');
   body.classList.remove('page-js');
   document.removeEventListener('keydown', closeModalByESC); // убрала слушатели при закрытии окна
-  document.removeEventListener('click', closeModalByOverlay);
+  popup.removeEventListener('click', closeModalByOverlay);
 }
 
 //Функция закрытия модальных окон по ESC
@@ -125,6 +117,10 @@ function submitFormNewCard(evt) {
   }
   addCard(createCard(picElement));
   closeModal(modalpic);
+  picName.value = ''; // пустая форма при открытии после сабмита
+  picLink.value = '';
+  btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
+  btnSubmitAddCard.classList.add('modal__button_disabled');
 }
 
 //like карточки
@@ -145,5 +141,5 @@ buttonEdit.addEventListener('click', () => openPopupEditProfile());
 formElem.addEventListener('submit', submitFormHandler);
 closeButtonReg.addEventListener('click', () => closeModal(modalEdit));
 closeButtonPic.addEventListener('click', () => closeModal(modalpic));
-addButton.addEventListener('click', () => openAddModal());
+addButton.addEventListener('click', () => openModal(modalpic));
 modalCardCloseBtn.addEventListener('click', () => closeModal(modalCard));
