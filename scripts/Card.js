@@ -1,4 +1,4 @@
-
+import { closeModalByOverlay, closeModalByESC } from './scripts.js';
 export class Card {
   constructor(item, selector) {
     this._name = item.name;
@@ -28,8 +28,7 @@ export class Card {
   }
 
   _likeActive() {            //like карточки
-    const likeBtn = this._element.querySelector('.element__like');
-    likeBtn.classList.toggle('element__like_active');
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
 
   _deleteElement() {        //удаление карточки
@@ -44,6 +43,9 @@ export class Card {
     modalImage.alt = this._name;
     modalLabel.textContent = this._name;
     modalCard.classList.add('modal_active');
+    modalCard.addEventListener('click', closeModalByOverlay);
+    document.addEventListener('keydown', closeModalByESC);
+    document.querySelector('body').classList.add('page-js');
   }
 
   _setEventListeners() { //добавляем слушатели на лайк и удаление карточки

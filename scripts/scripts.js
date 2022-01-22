@@ -35,9 +35,11 @@ const objConfig = {
 }
 
 const profileFormValidation = new FormValidator(objConfig, '.modal__form_place_regform');
-profileFormValidation.enableValidation();
 const addImageFormValidation = new FormValidator(objConfig, '.modal__form_place_modalpic');
+
+// включаем валидацию каждой форме
 addImageFormValidation.enableValidation();
+profileFormValidation.enableValidation();
 
 
 
@@ -70,7 +72,7 @@ function closeModal(popup) {
 
 //Функция закрытия модальных окон по ESC
 
-function closeModalByESC(evt) {
+export function closeModalByESC(evt) {
   if (evt.key === 'Escape') {
     closeModal(document.querySelector('.modal_active'));
   }
@@ -78,7 +80,7 @@ function closeModalByESC(evt) {
 
 //Функция закрытия модальных по клику по оверлею
 
-function closeModalByOverlay(evt) {
+export function closeModalByOverlay(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.target);
   }
