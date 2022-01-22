@@ -1,5 +1,6 @@
 import { initialCards } from './utils/cards.js';
 import { Card } from './Card.js';
+import { FormValidator } from './FormFalidator.js';
 const body = document.querySelector('body');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
@@ -23,6 +24,21 @@ const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
 const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
 const picContainer = document.querySelector('.elements');
 const picTemplate = document.querySelector('#element').content;
+
+const objConfig = {
+  formSelector: '.modal__form',
+  inputSelector: '.modal__field',
+  submitButtonSelector: '.modal__button',
+  inactiveButtonClass: 'modal__button_disabled',
+  inputErrorClass: 'modal__field_type_error',
+  errorClass: 'modal__error_visible'
+}
+
+const profileFormValidation = new FormValidator(objConfig, '.modal__form_place_regform');
+profileFormValidation.enableValidation();
+const addImageFormValidation = new FormValidator(objConfig, '.modal__form_place_modalpic');
+addImageFormValidation.enableValidation();
+
 
 
 //функция открытия модального окна редактирования профиля
@@ -77,6 +93,7 @@ function submitFormHandler(evt) {
   closeModal(modalEdit);
 }
 
+// масштабируем карточки из класса Card, проходим по заданному массиву
 function createItemCard(item) {
   const card = new Card(item, '#element');
   const cardElement = card.createCard();
