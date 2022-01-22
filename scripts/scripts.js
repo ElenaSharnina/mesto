@@ -15,15 +15,12 @@ const userjob = document.querySelector('.profile__occupation');
 const modalpic = document.querySelector('.modalpic');
 const addButton = document.querySelector('.profile__add-button');
 const modalCard = document.querySelector('.modal-card');
-const modalImage = document.querySelector('.modal-card__image');
-const modalLabel = document.querySelector('.modal-card__label');
 const modalCardCloseBtn = document.querySelector('.modal__close-icon_place_modal-card');
 const picName = document.querySelector('.modal__field_type_card-name');
 const picLink = document.querySelector('.modal__field_type_card-link');
 const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
 const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
 const picContainer = document.querySelector('.elements');
-const picTemplate = document.querySelector('#element').content;
 
 const objConfig = {
   formSelector: '.modal__form',
