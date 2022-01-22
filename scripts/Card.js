@@ -1,4 +1,4 @@
-import { closeModalByOverlay, closeModalByESC } from './scripts.js';
+import { openModalCard } from './index.js';
 export class Card {
   constructor(item, selector) {
     this._name = item.name;
@@ -27,30 +27,20 @@ export class Card {
     return this._element;
   }
 
-  _likeActive() {            //like карточки
+  _likeElement() {            //like карточки
     this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
 
   _deleteElement() {        //удаление карточки
     this._element.remove();
+    this._element = null;
   }
 
-  _openModalCard() {    //открытие карточки в модальном окне
-    const modalCard = document.querySelector('.modal-card');
-    const modalImage = document.querySelector('.modal-card__image');
-    const modalLabel = document.querySelector('.modal-card__label');
-    modalImage.src = this._link;
-    modalImage.alt = this._name;
-    modalLabel.textContent = this._name;
-    modalCard.classList.add('modal_active');
-    modalCard.addEventListener('click', closeModalByOverlay);
-    document.addEventListener('keydown', closeModalByESC);
-    document.querySelector('body').classList.add('page-js');
-  }
+
 
   _setEventListeners() { //добавляем слушатели на лайк и удаление карточки
     this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._likeActive()
+      this._likeElement()
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
@@ -58,7 +48,7 @@ export class Card {
     });
 
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._openModalCard()
+      openModalCard(this._name, this._link)
     });
   }
 }

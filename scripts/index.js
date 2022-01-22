@@ -1,7 +1,6 @@
 import { initialCards } from './utils/cards.js';
 import { Card } from './Card.js';
-import { FormValidator } from './FormFalidator.js';
-const body = document.querySelector('body');
+import { FormValidator } from './FormValidator.js';
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
 const closeButtonReg = document.querySelector('.modal__close-icon_place_regform');
@@ -21,6 +20,8 @@ const picLink = document.querySelector('.modal__field_type_card-link');
 const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
 const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
 const picContainer = document.querySelector('.elements');
+
+
 
 const objConfig = {
   formSelector: '.modal__form',
@@ -52,7 +53,7 @@ function openPopupEditProfile() {
 
 function openModal(popup) {
   popup.classList.add('modal_active');
-  body.classList.add('page-js');
+  document.body.classList.add('page-js');
   popup.addEventListener('click', closeModalByOverlay);
   document.addEventListener('keydown', closeModalByESC);
 }
@@ -62,14 +63,14 @@ function openModal(popup) {
 
 function closeModal(popup) {
   popup.classList.remove('modal_active');
-  body.classList.remove('page-js');
+  document.body.classList.remove('page-js');
   document.removeEventListener('keydown', closeModalByESC); // убрала слушатели при закрытии окна
   popup.removeEventListener('click', closeModalByOverlay);
 }
 
 //Функция закрытия модальных окон по ESC
 
-export function closeModalByESC(evt) {
+function closeModalByESC(evt) {
   if (evt.key === 'Escape') {
     closeModal(document.querySelector('.modal_active'));
   }
@@ -77,7 +78,7 @@ export function closeModalByESC(evt) {
 
 //Функция закрытия модальных по клику по оверлею
 
-export function closeModalByOverlay(evt) {
+function closeModalByOverlay(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.target);
   }
@@ -119,13 +120,22 @@ function submitFormNewCard(evt) {
   }
   addCard(createItemCard(picElement));
   closeModal(modalpic);
-  picName.value = ''; // пустая форма при открытии после сабмита
-  picLink.value = '';
+  //picName.value = ''; // пустая форма при открытии после сабмита
+  //picLink.value = '';
+  formElementPic.reset();
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');
 }
 
-
+export function openModalCard(name, link) {    //открытие карточки в модальном окне
+  const modalCard = document.querySelector('.modal-card');
+  const modalImage = document.querySelector('.modal-card__image');
+  const modalLabel = document.querySelector('.modal-card__label');
+  modalLabel.textContent = name;
+  modalImage.src = link;
+  modalImage.alt = name;
+  openModal(modalCard);
+}
 
 
 formElementPic.addEventListener('submit', submitFormNewCard);   //в 1-м ревью 6 проекта показано, как классно писать слушатели
