@@ -1,3 +1,5 @@
+import { initialCards } from './utils/cards.js';
+import { Card } from './Card.js';
 const body = document.querySelector('body');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
@@ -75,37 +77,21 @@ function submitFormHandler(evt) {
   closeModal(modalEdit);
 }
 
-//выводим карточки на страницу из массива
-
-function addCard(item) {
-  picContainer.prepend(item);
+function createItemCard(item) {
+  const card = new Card(item, '#element');
+  const cardElement = card.createCard();
+  return cardElement;
 }
 
-function createCard(item) {
-  const picElement = picTemplate.cloneNode(true);
-  const image = picElement.querySelector('.element__image');
-  picElement.querySelector('.element__name').textContent = item.name;
-  image.src = item.link;
-  image.alt = item.name;
-
-  picElement.querySelector('.element__delete').addEventListener('click', deleteElement); //удаляем картинку
-
-  image.addEventListener('click', () => { //открытие модального окна у картинки
-    modalLabel.textContent = item.name;
-    modalImage.src = item.link;
-    modalImage.alt = item.name;
-    openModal(modalCard);
-  })
-
-  picElement.querySelector('.element__like').addEventListener('click', likeActive); //лайк карточки
-  return picElement;
+function addCard(cardElement) {
+  picContainer.prepend(cardElement);
 }
 
-function renderCards(array) { //отбираем элементы из массива
-  array.forEach((item) =>
-    addCard(createCard(item)));
-}
-renderCards(initialCards);
+initialCards.forEach((item) => {
+  const cardElement = createItemCard(item);
+  addCard(cardElement);
+});
+
 
 // добавление карточки из формы
 
@@ -115,7 +101,7 @@ function submitFormNewCard(evt) {
     name: picName.value,
     link: picLink.value
   }
-  addCard(createCard(picElement));
+  addCard(createItemCard(picElement));
   closeModal(modalpic);
   picName.value = ''; // пустая форма при открытии после сабмита
   picLink.value = '';
@@ -123,17 +109,7 @@ function submitFormNewCard(evt) {
   btnSubmitAddCard.classList.add('modal__button_disabled');
 }
 
-//like карточки
 
-function likeActive(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-// удаление Элемента
-
-function deleteElement(evt) {
-  evt.target.closest('.element').remove();
-}
 
 
 formElementPic.addEventListener('submit', submitFormNewCard);   //в 1-м ревью 6 проекта показано, как классно писать слушатели
