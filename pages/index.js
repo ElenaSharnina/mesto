@@ -2,6 +2,9 @@ import { initialCards } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
+import { Popup } from '../components/Popup.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
 const closeButtonReg = document.querySelector('.modal__close-icon_place_regform');
@@ -60,15 +63,6 @@ function openPopupEditProfile() {
   openModal(modalEdit);
 }
 
-//функция открытия модального окна
-
-function openModal(popup) {
-  popup.classList.add('modal_active');
-  document.body.classList.add('page-js');
-  popup.addEventListener('click', closeModalByOverlay);
-  document.addEventListener('keydown', closeModalByESC);
-}
-
 
 //функция закрытия модального окна
 
@@ -79,21 +73,6 @@ function closeModal(popup) {
   popup.removeEventListener('click', closeModalByOverlay);
 }
 
-//Функция закрытия модальных окон по ESC
-
-function closeModalByESC(evt) {
-  if (evt.key === 'Escape') {
-    closeModal(document.querySelector('.modal_active'));
-  }
-}
-
-//Функция закрытия модальных по клику по оверлею
-
-function closeModalByOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeModal(evt.target);
-  }
-}
 
 //функция отправки формы профиля
 
@@ -103,23 +82,6 @@ function submitFormHandler(evt) {
   userjob.textContent = jobInput.value;
   closeModal(modalEdit);
 }
-
-// масштабируем карточки из класса Card, проходим по заданному массиву
-//function createItemCard(item) {
-//  const card = new Card(item, '#element');
-//  const cardElement = card.createCard();
-//  return cardElement;
-//}
-
-//function addCard(cardElement) {
-//  picContainer.prepend(cardElement);
-//}
-
-//initialCards.forEach((item) => {
-// const cardElement = createItemCard(item);
-// addCard(cardElement);
-//});
-
 
 // добавление карточки из формы
 
@@ -148,7 +110,7 @@ export function openModalCard(name, link) {    //открытие карточк
 }
 
 
-formElementPic.addEventListener('submit', submitFormNewCard);   //в 1-м ревью 6 проекта показано, как классно писать слушатели
+formElementPic.addEventListener('submit', submitFormNewCard);
 buttonEdit.addEventListener('click', () => openPopupEditProfile());
 formElem.addEventListener('submit', submitFormHandler);
 closeButtonReg.addEventListener('click', () => closeModal(modalEdit));
