@@ -1,6 +1,7 @@
-import { initialCards } from './utils/cards.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { initialCards } from '../utils/constants.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
 const buttonEdit = document.querySelector('.profile__edit-button');
 const modalEdit = document.querySelector('.modal-edit');
 const closeButtonReg = document.querySelector('.modal__close-icon_place_regform');
@@ -39,7 +40,17 @@ const addImageFormValidation = new FormValidator(objConfig, '.modal__form_place_
 addImageFormValidation.enableValidation();
 profileFormValidation.enableValidation();
 
+const cardList = new Section({
+  items: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, '#element');
+    const cardElement = card.createCard();
+    cardList.addItem(cardElement);
+  }
+}, '.elements'
 
+);
+cardList.renderItems();
 
 //функция открытия модального окна редактирования профиля
 
@@ -94,20 +105,20 @@ function submitFormHandler(evt) {
 }
 
 // масштабируем карточки из класса Card, проходим по заданному массиву
-function createItemCard(item) {
-  const card = new Card(item, '#element');
-  const cardElement = card.createCard();
-  return cardElement;
-}
+//function createItemCard(item) {
+//  const card = new Card(item, '#element');
+//  const cardElement = card.createCard();
+//  return cardElement;
+//}
 
-function addCard(cardElement) {
-  picContainer.prepend(cardElement);
-}
+//function addCard(cardElement) {
+//  picContainer.prepend(cardElement);
+//}
 
-initialCards.forEach((item) => {
-  const cardElement = createItemCard(item);
-  addCard(cardElement);
-});
+//initialCards.forEach((item) => {
+// const cardElement = createItemCard(item);
+// addCard(cardElement);
+//});
 
 
 // добавление карточки из формы
@@ -118,10 +129,9 @@ function submitFormNewCard(evt) {
     name: picName.value,
     link: picLink.value
   }
-  addCard(createItemCard(picElement));
+  const card = new Card(picElement, '#element');
+  cardList.addItem(card.createCard());
   closeModal(modalpic);
-  //picName.value = ''; // пустая форма при открытии после сабмита
-  //picLink.value = '';
   formElementPic.reset();
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');

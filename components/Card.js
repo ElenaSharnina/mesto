@@ -1,4 +1,4 @@
-import { openModalCard } from './index.js';
+import { openModalCard } from '../pages/index.js';
 export class Card {
   constructor(item, selector) {
     this._name = item.name;
