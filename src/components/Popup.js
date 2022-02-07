@@ -6,7 +6,7 @@ export class Popup {
   open() { //открытие модального окна
     this._popup.classList.add('modal_active');
     document.body.classList.add('page-js');
-    this._popup.addEventListener('click', this._closeModalByOverlay);
+    document.addEventListener('click', this._closeModalByOverlay);
     document.addEventListener('keydown', this._closeModalByESC);
   }
 
@@ -14,16 +14,16 @@ export class Popup {
     this._popup.classList.remove('modal_active');
     document.body.classList.remove('page-js');
     document.removeEventListener('keydown', this._closeModalByESC);
-    this._popup.removeEventListener('click', this._closeModalByOverlay);
+    document.removeEventListener('click', this._closeModalByOverlay);
   }
 
-  _closeModalByESC(evt) { // закрытие по ESC
+  _closeModalByESC = (evt) => { // закрытие по ESC
     if (evt.key === 'Escape') {
       this.close();
     }
   }
-  _closeModalByOverlay(evt) { // закрытие по клику по оверлею
-    if (evt.target === evt.currentTarget) {
+  _closeModalByOverlay = (evt) => { // закрытие по клику по оверлею
+    if (evt.target.classList.contains('modal')) {
       this.close();
     }
   }
