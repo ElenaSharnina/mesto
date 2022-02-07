@@ -1,9 +1,10 @@
-import { openModalCard } from '../pages/index.js';
+
 export class Card {
-  constructor(item, selector) {
+  constructor(item, selector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
     this._selector = selector;
+    this._openModalCard = handleCardClick;
   }
 
   _getTemplate() {              //возвращаем разметку
@@ -36,8 +37,6 @@ export class Card {
     this._element = null;
   }
 
-
-
   _setEventListeners() { //добавляем слушатели на лайк и удаление карточки
     this._element.querySelector('.element__like').addEventListener('click', () => {
       this._likeElement()
@@ -47,8 +46,8 @@ export class Card {
       this._deleteElement()
     });
 
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      openModalCard(this._name, this._link)
+    this._element.querySelector('.element__image').addEventListener('click', () => { // слушатель на открытие карточки в модальном окне
+      this._openModalCard(this._name, this._link)
     });
   }
 }

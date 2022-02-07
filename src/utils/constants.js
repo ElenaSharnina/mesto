@@ -23,4 +23,12 @@ export const initialCards = [
         name: 'Байкал',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-]; 
+];
+export const objConfig = {
+    formSelector: '.modal__form',
+    inputSelector: '.modal__field',
+    submitButtonSelector: '.modal__button',
+    inactiveButtonClass: 'modal__button_disabled',
+    inputErrorClass: 'modal__field_type_error',
+    errorClass: 'modal__error_visible'
+}

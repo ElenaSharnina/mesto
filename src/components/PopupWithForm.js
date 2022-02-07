@@ -8,7 +8,7 @@ export class PopupWithForm extends Popup {
 
   _getInputValues() {
     const values = {};
-    Array.from(this.form.querySelectorAll('.modal__field')).forEach(input => {
+    Array.from(this._popup.querySelectorAll('.modal__field')).forEach(input => {
       values[input.name] = input.value
     });
     return values;
