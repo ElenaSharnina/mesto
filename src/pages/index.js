@@ -51,7 +51,7 @@ function submitFormNewCard() {
   }
   const card = new Card(picElement, '#element', openModalCard);
   cardList.addItem(card.createCard());
-  formElementPic.reset();
+  //formElementPic.reset();
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');
 }
@@ -74,23 +74,28 @@ function openModalCard(name, link) {    //открытие карточки в �
 //функция открытия модального окна редактирования профиля
 
 function openPopupEditProfile() {
-  const popupEditProfile = new PopupWithForm('.modal-edit', handleFormSubmit);
+  const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
   popupEditProfile.setEventListeners();
   popupEditProfile.open();
-  const inputInfo = new UserInfo({ userName: username, userInfo: userjob });
-  nameInput.value = inputInfo.getUserInfo().userName;
-  jobInput.value = inputInfo.getUserInfo().userInfo;
+  const inputValues = new UserInfo({
+    userName: username,
+    userInfo: userjob
+  });
+  //console.log(inputValues);
+  nameInput.value = inputValues.getUserInfo().userName;
+  jobInput.value = inputValues.getUserInfo().userInfo;
 }
 
 
-//функция отправки формы профиля
 
-function handleFormSubmit(data) {
+
+function submitProfileForm() {
+
   const userInfo = new UserInfo({
     userName: username,
     userInfo: userjob
   })
-  userInfo.setUserInfo(data);
+  userInfo.setUserInfo();
 }
 
 

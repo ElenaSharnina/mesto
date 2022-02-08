@@ -1,6 +1,7 @@
 export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this._closeBtn = this._popup.querySelector('.modal__close-icon');
   }
 
   open() { //открытие модального окна
@@ -28,8 +29,7 @@ export class Popup {
     }
   }
   setEventListeners() {
-    const modalCloseBtn = this._popup.querySelector('.modal__close-icon');
-    modalCloseBtn.addEventListener('click', () => {
+    this._closeBtn.addEventListener('click', () => {
       this.close();
     })
   }
