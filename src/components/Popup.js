@@ -7,15 +7,15 @@ export class Popup {
   open() { //открытие модального окна
     this._popup.classList.add('modal_active');
     document.body.classList.add('page-js');
-    document.addEventListener('click', this._closeModalByOverlay);
-    document.addEventListener('keydown', this._closeModalByESC);
+
+    this.setEventListeners();
   }
 
   close() { //закрытие модального окна
     this._popup.classList.remove('modal_active');
     document.body.classList.remove('page-js');
-    document.removeEventListener('keydown', this._closeModalByESC);
-    document.removeEventListener('click', this._closeModalByOverlay);
+
+    this.removeEventListener();
   }
 
   _closeModalByESC = (evt) => { // закрытие по ESC
@@ -32,5 +32,14 @@ export class Popup {
     this._closeBtn.addEventListener('click', () => {
       this.close();
     })
+    document.addEventListener('click', this._closeModalByOverlay);
+    document.addEventListener('keydown', this._closeModalByESC);
+  }
+  removeEventListener() {
+    this._closeBtn.removeEventListener('click', () => {
+      this.close();
+    })
+    document.removeEventListener('keydown', this._closeModalByESC);
+    document.removeEventListener('click', this._closeModalByOverlay);
   }
 }
