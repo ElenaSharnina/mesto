@@ -1,4 +1,16 @@
-import { initialCards, objConfig } from '../utils/constants.js';
+import {
+    initialCards,
+    objConfig,
+    buttonEdit,
+    nameInput,
+    jobInput,
+    username,
+    userjob,
+    addButton,
+    picName,
+    picLink,
+    btnSubmitAddCard
+} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -6,19 +18,6 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 //import './index.css';
-const buttonEdit = document.querySelector('.profile__edit-button');
-
-const nameInput = document.querySelector('.modal__field_type_name');
-const jobInput = document.querySelector('.modal__field_type_occupation');
-const username = document.querySelector('.profile__name');
-const userjob = document.querySelector('.profile__occupation');
-const addButton = document.querySelector('.profile__add-button');
-
-const picName = document.querySelector('.modal__field_type_card-name');
-const picLink = document.querySelector('.modal__field_type_card-link');
-const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
-const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
-
 
 // включаем валидацию каждой форме
 
@@ -50,14 +49,12 @@ function submitFormNewCard() {
     }
     const card = new Card(picElement, '#element', openModalCard);
     cardList.addItem(card.createCard());
-    //formElementPic.reset();
     btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
     btnSubmitAddCard.classList.add('modal__button_disabled');
 }
 
 function openPopupAddPhoto() {
     const popupAddPhoto = new PopupWithForm('.modalpic', submitFormNewCard);
-    //popupAddPhoto.setEventListeners();
     popupAddPhoto.open();
 }
 
@@ -74,13 +71,11 @@ function openModalCard(name, link) {    //открытие карточки в �
 
 function openPopupEditProfile() {
     const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
-    //popupEditProfile.setEventListeners();
     popupEditProfile.open();
     const inputValues = new UserInfo({
         userName: username,
         userInfo: userjob
     });
-    //console.log(inputValues);
     nameInput.value = inputValues.getUserInfo().userName;
     jobInput.value = inputValues.getUserInfo().userInfo;
 }

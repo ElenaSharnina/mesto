@@ -32,3 +32,16 @@ export const objConfig = {
     inputErrorClass: 'modal__field_type_error',
     errorClass: 'modal__error_visible'
 }
+
+export const buttonEdit = document.querySelector('.profile__edit-button');
+
+export const nameInput = document.querySelector('.modal__field_type_name');
+export const jobInput = document.querySelector('.modal__field_type_occupation');
+export const username = document.querySelector('.profile__name');
+export const userjob = document.querySelector('.profile__occupation');
+export const addButton = document.querySelector('.profile__add-button');
+
+export const picName = document.querySelector('.modal__field_type_card-name');
+export const picLink = document.querySelector('.modal__field_type_card-link');
+export const btnSubmitProfile = document.querySelector('.modal__button_place_profile');
+export const btnSubmitAddCard = document.querySelector('.modal__button_type_create');
