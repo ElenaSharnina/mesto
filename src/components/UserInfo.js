@@ -1,7 +1,7 @@
 export class UserInfo {
-  constructor({ userName, userInfo }) {
-    this._userName = userName;
-    this._userInfo = userInfo;
+  constructor(userNameSelector, userInfoSelector) {  // в брифе селекторы!
+    this._userName = document.querySelector(userNameSelector);
+    this._userInfo = document.querySelector(userInfoSelector);
   }
 
   getUserInfo() {
@@ -12,9 +12,9 @@ export class UserInfo {
     return userValues;
   }
 
-  setUserInfo() {
-    this._userName.textContent = document.querySelector('.modal__field_type_name').value;
-    this._userInfo.textContent = document.querySelector('.modal__field_type_occupation').value;
+  setUserInfo(nameInput, jobInput) {
+    this._userName.textContent = nameInput.value;
+    this._userInfo.textContent = jobInput.value;
   }
 
 }

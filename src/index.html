@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-
+  <link rel="stylesheet" href="./pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.">
@@ -15,13 +15,13 @@
 <body>
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Mesto">
+      <img class="header__logo" src="./images/logo.svg" alt="Логотип Mesto">
     </header>
     <main class="main">
       <section class="profile">
         <div class="profile__section">
           <div class="profile__avatar">
-            <img class="profile__foto" src="<%=require('./images/image.jpg')%>" alt="Фото профиля">
+            <img class="profile__foto" src="./images/image.jpg" alt="Фото профиля">
           </div>
           <div class="profile__info">
             <div class="profile__editing">
@@ -103,7 +103,7 @@
   </div>
 
 
-
+  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

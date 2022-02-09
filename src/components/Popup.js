@@ -36,10 +36,6 @@ export class Popup {
     document.addEventListener('keydown', this._closeModalByESC);
   }
   removeEventListener() {
-    this._closeBtn.removeEventListener('click', () => {
-      this.close();
-    })
     document.removeEventListener('keydown', this._closeModalByESC);
-    document.removeEventListener('click', this._closeModalByOverlay);
   }
 }

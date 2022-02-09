@@ -17,7 +17,7 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import './index.css';
+//import './index.css';
 
 // включаем валидацию каждой форме
 
@@ -29,11 +29,17 @@ profileFormValidation.enableValidation();
 
 // вставляем карточки из массива в разметку
 
+function createCard(cardItem) {
+    const card = new Card(cardItem, '#element', openModalCard);
+    const cardElement = card.createCard();
+    return cardElement;
+};
+
+
 const cardList = new Section({
     items: initialCards,
     renderer: (cardItem) => {
-        const card = new Card(cardItem, '#element', openModalCard);
-        const cardElement = card.createCard();
+        const cardElement = createCard(cardItem);
         cardList.addItem(cardElement);
     }
 }, '.elements'
@@ -41,53 +47,48 @@ const cardList = new Section({
 );
 cardList.renderItems();
 
-function submitFormNewCard() {
 
+function submitFormNewCard() {
     const picElement = {
         name: picName.value,
         link: picLink.value
     }
-    const card = new Card(picElement, '#element', openModalCard);
-    cardList.addItem(card.createCard());
+    cardList.addItem(createCard(picElement));
     btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
     btnSubmitAddCard.classList.add('modal__button_disabled');
 }
+const popupAddPhoto = new PopupWithForm('.modalpic', submitFormNewCard);
 
 function openPopupAddPhoto() {
-    const popupAddPhoto = new PopupWithForm('.modalpic', submitFormNewCard);
     popupAddPhoto.open();
 }
 
+const popupWithImage = new PopupWithImage('.modal-card');
+popupWithImage.setEventListeners();
 
 function openModalCard(name, link) {    //открытие карточки в модальном окне
-    const popupWithImage = new PopupWithImage('.modal-card');
     this.src = link;
     this.textContent = name;
-    popupWithImage.setEventListeners();
     popupWithImage.open(name, link);
 }
 
 //функция открытия модального окна редактирования профиля
+const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
 
-function openPopupEditProfile() {
-    const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
-    popupEditProfile.open();
-    const inputValues = new UserInfo({
-        userName: username,
-        userInfo: userjob
-    });
-    nameInput.value = inputValues.getUserInfo().userName;
-    jobInput.value = inputValues.getUserInfo().userInfo;
-}
+const inputValues = new UserInfo('.profile__name', '.profile__occupation');
 
 function submitProfileForm() {
-
-    const userInfo = new UserInfo({
-        userName: username,
-        userInfo: userjob
-    })
-    userInfo.setUserInfo();
+    inputValues.setUserInfo(nameInput, jobInput);
 }
+
+function openPopupEditProfile() {
+
+    nameInput.value = inputValues.getUserInfo().userName;
+    jobInput.value = inputValues.getUserInfo().userInfo;
+
+    popupEditProfile.open();
+}
+
 
 
 
