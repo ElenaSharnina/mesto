@@ -20,6 +20,7 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { PopupDelete } from '../components/PopupDelete.js';
 import './index.css';
 
 // включаем валидацию каждой форме
@@ -34,7 +35,7 @@ editAvatarFornValidation.enableValidation();
 // вставляем карточки из массива в разметку
 
 function createCard(cardItem) {
-  const card = new Card(cardItem, '#element', openModalCard);
+  const card = new Card(cardItem, '#element', openModalCard, openDeletePopup);
   const cardElement = card.createCard();
   return cardElement;
 };
@@ -106,10 +107,16 @@ function submitFormAvatar() {
   btnSubmitAvatar.classList.add('modal__button_disabled');
 }
 
-
+// удаление карточки через попап
+const popupDeleteCard = new PopupDelete('.modal-delete', '.modal__button_place_delete');
+function openDeletePopup() {
+  popupDeleteCard.open();
+}
+popupDeleteCard.setEventListeners();
 
 buttonEdit.addEventListener('click', () => openPopupEditProfile());
 
 addButton.addEventListener('click', () => openPopupAddPhoto());
 
 elementEditAvatar.addEventListener('click', () => openPopupEditAvatar());
+

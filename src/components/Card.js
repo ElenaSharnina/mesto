@@ -1,10 +1,11 @@
 
 export class Card {
-  constructor(item, selector, handleCardClick) {
+  constructor(item, selector, handleCardClick, handleCardDelete) {
     this._name = item.name;
     this._link = item.link;
     this._selector = selector;
     this._openModalCard = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
   }
 
   _getTemplate() {              //возвращаем разметку
@@ -32,7 +33,7 @@ export class Card {
     this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
 
-  _deleteElement() {        //удаление карточки
+  deleteElement = () => {        //удаление карточки
     this._element.remove();
     this._element = null;
   }
@@ -43,7 +44,7 @@ export class Card {
     });
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._deleteElement()
+      this._handleCardDelete()
     });
 
     this._element.querySelector('.element__image').addEventListener('click', () => { // слушатель на открытие карточки в модальном окне
