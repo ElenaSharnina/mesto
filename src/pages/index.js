@@ -1,5 +1,4 @@
 import {
-  initialCards,
   objConfig,
   buttonEdit,
   nameInput,
@@ -38,7 +37,7 @@ editAvatarFornValidation.enableValidation();
 
 const api = new Api(apiConfig);
 let cardList;
-api.getInitialCards()
+api.getInitialCards()  //получение карточек с сервера
   .then(res => {
     console.log(res);
     cardList = new Section({
@@ -58,7 +57,7 @@ api.getInitialCards()
   });
 
 
-// вставляем карточки из массива в разметку
+// функция создания карточки
 
 function createCard(cardItem) {
   const card = new Card(cardItem, '#element', openModalCard);
@@ -80,8 +79,8 @@ function createCard(cardItem) {
 api.getUserInfoApi()
   .then(res => {
     console.log(res);
-    inputValues.setUserInfoApi({ nameInput: res.name, jobInput: res.about });
-    document.querySelector('.profile__foto').src = res.avatar;
+    inputValues.setUserInfo(res);
+
   })
   .catch(err => {
     console.log(err);
@@ -124,7 +123,16 @@ const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
 const inputValues = new UserInfo('.profile__name', '.profile__occupation');
 
 function submitProfileForm() {
-  inputValues.setUserInfo(nameInput, jobInput);
+  //inputValues.setUserInfo(nameInput, jobInput);
+  const info = {
+    username: nameInput.value,
+    userjob: jobInput.value
+  }
+  api.setUserInfoApi(info.username, info.userjob)
+    .then(data => {
+      console.log(data);
+      inputValues.setUserInfo(data);
+    })
 }
 
 function openPopupEditProfile() {
