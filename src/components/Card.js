@@ -1,11 +1,10 @@
 
 export class Card {
-  constructor(item, selector, handleCardClick, handleCardDelete) {
+  constructor(item, selector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
     this._selector = selector;
     this._openModalCard = handleCardClick;
-    this._handleCardDelete = handleCardDelete;
   }
 
   _getTemplate() {              //возвращаем разметку

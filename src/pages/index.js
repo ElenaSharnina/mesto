@@ -12,7 +12,8 @@ import {
   picLink,
   btnSubmitAddCard,
   btnSubmitAvatar,
-  elementEditAvatar
+  elementEditAvatar,
+  apiConfig
 } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -21,6 +22,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupDelete } from '../components/PopupDelete.js';
+import { Api } from '../components/Api.js'
 import './index.css';
 
 // включаем валидацию каждой форме
@@ -32,36 +34,75 @@ const editAvatarFornValidation = new FormValidator(objConfig, '.modal__form_plac
 addImageFormValidation.enableValidation();
 profileFormValidation.enableValidation();
 editAvatarFornValidation.enableValidation();
+
+
+const api = new Api(apiConfig);
+let cardList;
+api.getInitialCards()
+  .then(res => {
+    console.log(res);
+    cardList = new Section({
+      items: res,
+      renderer: cardItem => {
+        const cardElement = createCard(cardItem);
+        cardList.addItem(cardElement);
+      },
+    },
+      '.elements'
+    );
+    cardList.renderItems();
+
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
 // вставляем карточки из массива в разметку
 
 function createCard(cardItem) {
-  const card = new Card(cardItem, '#element', openModalCard, openDeletePopup);
+  const card = new Card(cardItem, '#element', openModalCard);
   const cardElement = card.createCard();
   return cardElement;
 };
 
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (cardItem) => {
-    const cardElement = createCard(cardItem);
-    cardList.addItem(cardElement);
-  }
-}, '.elements'
+//const cardList = new Section({
+//  items: initialCards,
+//  renderer: (cardItem) => {
+//    const cardElement = createCard(cardItem);
+//    cardList.addItem(cardElement);
+//  }
+//}, '.elements'
 
-);
-cardList.renderItems();
-
+//);
+//cardList.renderItems();
+api.getUserInfoApi()
+  .then(res => {
+    console.log(res);
+    inputValues.setUserInfoApi({ nameInput: res.name, jobInput: res.about });
+    document.querySelector('.profile__foto').src = res.avatar;
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 function submitFormNewCard() {
   const picElement = {
     name: picName.value,
     link: picLink.value
   }
-  cardList.addItem(createCard(picElement));
+  api.addNewCard(picElement.name, picElement.link)
+    .then(data => {
+      cardList.addItem(createCard(data));
+    })
+  //cardList.addItem(createCard(picElement));
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');
 }
+
+
+
 const popupAddPhoto = new PopupWithForm('.modalpic', submitFormNewCard);
 
 function openPopupAddPhoto() {

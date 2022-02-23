@@ -1,38 +1,44 @@
 export const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
 ];
 export const objConfig = {
-    formSelector: '.modal__form',
-    inputSelector: '.modal__field',
-    submitButtonSelector: '.modal__button',
-    inactiveButtonClass: 'modal__button_disabled',
-    inputErrorClass: 'modal__field_type_error',
-    errorClass: 'modal__error_visible'
+  formSelector: '.modal__form',
+  inputSelector: '.modal__field',
+  submitButtonSelector: '.modal__button',
+  inactiveButtonClass: 'modal__button_disabled',
+  inputErrorClass: 'modal__field_type_error',
+  errorClass: 'modal__error_visible'
 }
-
+export const apiConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort36',
+  headers: {
+    authorization: 'aae70420-34f5-44cc-8cb0-a49b7f2f456b',
+    'Content-Type': 'application/json'
+  }
+}
 export const buttonEdit = document.querySelector('.profile__edit-button');
 
 export const nameInput = document.querySelector('.modal__field_type_name');
