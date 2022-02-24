@@ -23,6 +23,8 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupDelete } from '../components/PopupDelete.js';
 import { Api } from '../components/Api.js'
 import './index.css';
+let myId;
+let cardList;
 
 // включаем валидацию каждой форме
 
@@ -36,7 +38,7 @@ editAvatarFornValidation.enableValidation();
 
 
 const api = new Api(apiConfig);
-let cardList;
+
 api.getInitialCards()  //получение карточек с сервера
   .then(res => {
     console.log(res);
@@ -59,26 +61,35 @@ api.getInitialCards()  //получение карточек с сервера
 
 // функция создания карточки
 
+console.log(myId);
 function createCard(cardItem) {
-  const card = new Card(cardItem, '#element', openModalCard);
+  const card = new Card(cardItem, '#element', openModalCard, myId, openDeletePopup, () => {
+    api.like(card.getId()) // функция лайка
+      .then((res) => {
+        card.likeElement();
+        card.countLikes(res);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      })
+  }, () => {
+    api.dislike(card.getId()) // снятие лайка
+      .then((res) => {
+        card.dislikeElement();
+        card.countLikes(res);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      })
+  })
   const cardElement = card.createCard();
   return cardElement;
 };
 
-
-//const cardList = new Section({
-//  items: initialCards,
-//  renderer: (cardItem) => {
-//    const cardElement = createCard(cardItem);
-//    cardList.addItem(cardElement);
-//  }
-//}, '.elements'
-
-//);
-//cardList.renderItems();
 api.getUserInfoApi()
   .then(res => {
     console.log(res);
+    myId = res._id;
     inputValues.setUserInfo(res);
 
   })
@@ -95,12 +106,9 @@ function submitFormNewCard() {
     .then(data => {
       cardList.addItem(createCard(data));
     })
-  //cardList.addItem(createCard(picElement));
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');
 }
-
-
 
 const popupAddPhoto = new PopupWithForm('.modalpic', submitFormNewCard);
 

@@ -42,3 +42,5 @@
 @import url(../blocks/modal-card/__label/modal-card__label.css);
 @import url(../blocks/modal-card/__container/modal-card__container.css);
 @import url(../blocks/modal-card/__image/modal-card__image.css);
+@import url(../blocks/element/__count/element__count.css);
+@import url(../blocks/element/__likes/element__likes.css);
