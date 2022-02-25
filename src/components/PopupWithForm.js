@@ -7,6 +7,7 @@ export class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.modal__form');
     this._inputList = this._form.querySelectorAll('.modal__field');
   }
+
   _getInputValues() {
     const valuesObj = {};
     this._inputList.forEach((input) => {
@@ -31,5 +32,14 @@ export class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
     this.removeEventListener();
+  }
+  alertLoading(isLoading) { // уведемление о процессе загрузки
+    const submitBtn = this._popup.querySelector('.button_loader');
+    if (isLoading) {
+      submitBtn.textContent = 'Сохранение...'
+    }
+    else {
+      submitBtn.textContent = 'Сохранить'
+    }
   }
 }

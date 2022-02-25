@@ -1,5 +1,3 @@
-import { avatarInput } from "../utils/constants";
-
 export class UserInfo {
   constructor(userNameSelector, userInfoSelector, userAvatarSelector) {  // в брифе селекторы!
     this._userName = document.querySelector(userNameSelector);
@@ -22,9 +20,6 @@ export class UserInfo {
     this._id = data._id;
   }
 
-  //setUserPhoto(avatar) {
-  // this._userAvatar.src = avatar;
-  //}
   getId() {
     return this._id;
   }

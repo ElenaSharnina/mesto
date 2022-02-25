@@ -1,9 +1,8 @@
 import { Popup } from "./Popup.js";
 export class PopupDelete extends Popup {
-    constructor(popupSelector, btnDelSelector, handleDeleteElement) {
+    constructor(popupSelector, formSelector) {
         super(popupSelector);
-        this._btnDelete = document.querySelector(btnDelSelector);
-        this._handleDeleteElement = handleDeleteElement;
+        this._form = document.querySelector(formSelector);
     }
     open(deleteElement) {
         super.open();
@@ -11,7 +10,10 @@ export class PopupDelete extends Popup {
     }
     setEventListeners() {
         super.setEventListeners();
-        this._btnDelete.addEventListener('click', () => this.handleDeleteElement())
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._deleteElement();
+        })
     }
 
 }

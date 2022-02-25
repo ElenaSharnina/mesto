@@ -57,7 +57,7 @@ export class Card {
 
   deleteElement = () => {        //удаление карточки
     this._element.remove();
-    this._element = null;
+    //this._element = null;
   }
 
   _checkLikes() {
@@ -69,6 +69,11 @@ export class Card {
   }
   countLikes(data) {
     this._element.querySelector('.element__count').textContent = data.likes.length;
+    if (data.likes.length === 0) {
+      this._element.querySelector('.element__count').classList.add('element__count_disactive');
+    } else {
+      this._element.querySelector('.element__count').classList.remove('element__count_disactive');
+    }
   }
 
   _setEventListeners() { //добавляем слушатели на лайк и удаление карточки

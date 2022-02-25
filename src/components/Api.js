@@ -88,6 +88,20 @@ export class Api {
         return Promise.reject(`Что-то пошло не так: ${res.status}`);
       })
   }
+
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+  }
   changeAvatar(avatar) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
