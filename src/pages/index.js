@@ -4,8 +4,6 @@ import {
   nameInput,
   jobInput,
   avatarInput,
-  username,
-  userjob,
   addButton,
   picName,
   picLink,
@@ -61,7 +59,6 @@ api.getInitialCards()  //получение карточек с сервера
 
 // функция создания карточки
 
-console.log(myId);
 function createCard(cardItem) {
   const card = new Card(cardItem, '#element', openModalCard, myId, openDeletePopup, () => {
     api.like(card.getId()) // функция лайка
@@ -128,7 +125,7 @@ function openModalCard(name, link) {    //открытие карточки в �
 //функция открытия модального окна редактирования профиля
 const popupEditProfile = new PopupWithForm('.modal-edit', submitProfileForm);
 
-const inputValues = new UserInfo('.profile__name', '.profile__occupation');
+const inputValues = new UserInfo('.profile__name', '.profile__occupation', '.profile__foto');
 
 function submitProfileForm() {
   //inputValues.setUserInfo(nameInput, jobInput);
@@ -138,8 +135,10 @@ function submitProfileForm() {
   }
   api.setUserInfoApi(info.username, info.userjob)
     .then(data => {
-      console.log(data);
       inputValues.setUserInfo(data);
+    })
+    .catch((err) => {
+      console.log(err);
     })
 }
 
@@ -159,7 +158,14 @@ function openPopupEditAvatar() {
   popupEditAvatar.open();
 }
 function submitFormAvatar() {
-  document.querySelector('.profile__foto').src = avatarInput.value;
+  api.changeAvatar(avatarInput.value)
+    .then(res => {
+      inputValues.setUserInfo(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  //document.querySelector('.profile__foto').src = avatarInput.value;
   btnSubmitAvatar.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAvatar.classList.add('modal__button_disabled');
 }
