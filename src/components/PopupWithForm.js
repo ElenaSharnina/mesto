@@ -34,7 +34,7 @@ export class PopupWithForm extends Popup {
     this.removeEventListener();
   }
   alertLoading(isLoading, message) { // уведемление о процессе загрузки
-    const submitBtn = this._popup.querySelector('.button_loader');
+    const submitBtn = this._popup.querySelector('.modal__button_loader');
     if (isLoading) {
       submitBtn.textContent = `Сохранение...`;
     }
