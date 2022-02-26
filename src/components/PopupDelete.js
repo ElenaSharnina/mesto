@@ -8,12 +8,18 @@ export class PopupDelete extends Popup {
         super.open();
         this._deleteElement = deleteElement;
     }
+    _handleSubmitDelete = (evt) => {
+        evt.preventDefault();
+        this._deleteElement();
+    }
     setEventListeners() {
         super.setEventListeners();
-        this._form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this._deleteElement();
-        })
+        this._form.addEventListener('submit', this._handleSubmitDelete);
+    }
+
+    removeEventListener() {
+        super.removeEventListener();
+        this._form.removeEventListener('submit', this._handleSubmitDelete);
     }
 
 }

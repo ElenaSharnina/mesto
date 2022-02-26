@@ -28,14 +28,17 @@ export class Popup {
       this.close();
     }
   }
+  _closeModalByIcon = () => {
+    this.close();
+  }
   setEventListeners() {
-    this._closeBtn.addEventListener('click', () => {
-      this.close();
-    })
+    this._closeBtn.addEventListener('click', this._closeModalByIcon);
     document.addEventListener('click', this._closeModalByOverlay);
     document.addEventListener('keydown', this._closeModalByESC);
   }
   removeEventListener() {
     document.removeEventListener('keydown', this._closeModalByESC);
+    this._closeBtn.removeEventListener('click', this._closeModalByIcon);
+    document.removeEventListener('click', this._closeModalByOverlay);
   }
 }

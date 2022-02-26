@@ -4,9 +4,9 @@ import {
   nameInput,
   jobInput,
   avatarInput,
+  cardnameInput,
+  urlInput,
   addButton,
-  picName,
-  picLink,
   btnSubmitAddCard,
   btnSubmitAvatar,
   elementEditAvatar,
@@ -32,33 +32,38 @@ const inputValues = new UserInfo('.profile__name', '.profile__occupation', '.pro
 const popupEditAvatar = new PopupWithForm('.modal-edid-avatar', submitFormAvatar);
 const api = new Api(apiConfig);
 
-api.getUserInfoApi() // получение данных о пользователе с сервера
+const getUserInfoPromise = api.getUserInfoApi();
+const getInitialCardsPromise = api.getInitialCards();
+getUserInfoPromise.then(res => {
+  myId = res._id;
+  inputValues.setUserInfo(res);
+})
+  .catch(err => {
+    console.log(err);
+  });
+getInitialCardsPromise.then(res => {
+  cardList = new Section({
+    items: res,
+    renderer: cardItem => {
+      const cardElement = createCard(cardItem);
+      cardList.addItem(cardElement);
+    },
+  },
+    '.elements'
+  );
+  cardList.renderItems();
+})
+  .catch(err => {
+    console.log(err);
+  });
+Promise.all([getUserInfoPromise, getInitialCardsPromise])
   .then(res => {
     console.log(res);
-    myId = res._id;
-    inputValues.setUserInfo(res);
   })
   .catch(err => {
     console.log(err);
   });
 
-api.getInitialCards()  //получение карточек с сервера
-  .then(res => {
-    console.log(res);
-    cardList = new Section({
-      items: res,
-      renderer: cardItem => {
-        const cardElement = createCard(cardItem);
-        cardList.addItem(cardElement);
-      },
-    },
-      '.elements'
-    );
-    cardList.renderItems();
-  })
-  .catch(err => {
-    console.log(err);
-  });
 
 // функция создания карточки
 function createCard(cardItem) {
@@ -96,24 +101,20 @@ function createCard(cardItem) {
 };
 
 
-function submitFormNewCard() { // добавление новой карточки
-  const picElement = {
-    name: picName.value,
-    link: picLink.value
-  }
+function submitFormNewCard(data) { // добавление новой карточки
   popupAddPhoto.alertLoading(true, 'Создать');
-  api.addNewCard(picElement.name, picElement.link)
-    .then(data => {
-      cardList.addItem(createCard(data));
+  api.addNewCard(data.cardname, data.cardlink)
+    .then(res => {
+      cardList.addItem(createCard(res));
+      popupAddPhoto.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
+
       this.alertLoading(false, 'Создать');
     })
-  btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
-  btnSubmitAddCard.classList.add('modal__button_disabled');
 }
 
 function openModalCard(name, link) {    //открытие карточки в модальном окне
@@ -122,29 +123,28 @@ function openModalCard(name, link) {    //открытие карточки в �
   popupWithImage.open(name, link);
 }
 
-function submitProfileForm() { //редактирование данных профиля
-  const info = {
-    username: nameInput.value,
-    userjob: jobInput.value
-  }
+function submitProfileForm(data) { //редактирование данных профиля
   popupEditProfile.alertLoading(true, 'Сохранить');
-  api.setUserInfoApi(info.username, info.userjob)
-    .then(data => {
-      inputValues.setUserInfo(data);
+  api.setUserInfoApi(data.username, data.userjob)
+    .then(res => {
+      inputValues.setUserInfo(res);
+      popupEditProfile.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
+
       popupEditProfile.alertLoading(false, 'Сохранить');
     })
 }
 
-function submitFormAvatar() { //редактировние аватара
+function submitFormAvatar(data) { //редактировние аватара
   popupEditAvatar.alertLoading(true, 'Сохранить');
-  api.changeAvatar(avatarInput.value)
+  api.changeAvatar(data.avatar)
     .then(res => {
       inputValues.setUserInfo(res);
+      popupEditAvatar.close();
     })
     .catch((err) => {
       console.log(err);
@@ -152,25 +152,23 @@ function submitFormAvatar() { //редактировние аватара
     .finally(() => {
       popupEditAvatar.alertLoading(false, 'Сохранить');
     })
-  btnSubmitAvatar.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
-  btnSubmitAvatar.classList.add('modal__button_disabled');
 }
-
-//popupDeleteCard.setEventListeners();
-//popupWithImage.setEventListeners();
 
 buttonEdit.addEventListener('click', () => { //открытие модального окна редактирования данных профиля
   nameInput.value = inputValues.getUserInfo().userName;
   jobInput.value = inputValues.getUserInfo().userInfo;
   popupEditProfile.open();
+  profileFormValidation.resetValidation();
 });
 
 addButton.addEventListener('click', () => { //открытие модального окна добавления новой карточки
   popupAddPhoto.open();
+  addImageFormValidation.resetValidation();
 });
 
 elementEditAvatar.addEventListener('click', () => { //открытие модального окна редактирования аватара
   popupEditAvatar.open();
+  editAvatarFornValidation.resetValidation();
 });
 
 // включаем валидацию каждой форме

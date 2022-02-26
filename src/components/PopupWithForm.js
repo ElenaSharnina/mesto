@@ -8,17 +8,16 @@ export class PopupWithForm extends Popup {
     this._inputList = this._form.querySelectorAll('.modal__field');
   }
 
-  _getInputValues() {
+  _getInputValues = () => {
     const valuesObj = {};
     this._inputList.forEach((input) => {
-      valuesObj.name = input.value
+      valuesObj[input.name] = input.value;
     });
     return valuesObj;
 
   }
   _handleSubmit = () => { // устраняем баг с пустыми сабмитами, удаляя все слушатели на закрытии
     this._handleFormSubmit(this._getInputValues());
-    this.close();
   }
   setEventListeners() {
     super.setEventListeners();
@@ -31,7 +30,6 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
-    this.removeEventListener();
   }
   alertLoading(isLoading, message) { // уведемление о процессе загрузки
     const submitBtn = this._popup.querySelector('.modal__button_loader');

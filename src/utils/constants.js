@@ -30,3 +30,5 @@ export const btnSubmitAddCard = document.querySelector('.modal__button_type_crea
 export const btnSubmitAvatar = document.querySelector('.modal__button_place_edit-avatar');
 export const elementEditAvatar = document.querySelector('.profile__avatar');
 export const avatarInput = document.querySelector('.modal__field_type_url-avatar');
+export const cardnameInput = document.querySelector('.modal__field_type_card-name');
+export const urlInput = document.querySelector('.modal__field_type_card-link');
