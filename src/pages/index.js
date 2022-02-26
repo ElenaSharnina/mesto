@@ -118,8 +118,7 @@ function submitFormNewCard(data) { // добавление новой карто
 }
 
 function openModalCard(name, link) {    //открытие карточки в модальном окне
-  this.src = link;
-  this.textContent = name;
+
   popupWithImage.open(name, link);
 }
 

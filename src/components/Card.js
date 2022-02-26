@@ -90,10 +90,8 @@ export class Card {
     }
     this._element.querySelector('.element__like').addEventListener('click', () => {
       if (this._element.querySelector('.element__like').classList.contains('element__like_active')) {
-        this.dislikeElement();
         this._dislike();
       } else {
-        this.likeElement();
         this._like();
       }
     });
