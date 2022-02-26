@@ -33,13 +33,13 @@ export class PopupWithForm extends Popup {
     this._form.reset();
     this.removeEventListener();
   }
-  alertLoading(isLoading) { // уведемление о процессе загрузки
+  alertLoading(isLoading, message) { // уведемление о процессе загрузки
     const submitBtn = this._popup.querySelector('.button_loader');
     if (isLoading) {
-      submitBtn.textContent = 'Сохранение...'
+      submitBtn.textContent = `Сохранение...`;
     }
     else {
-      submitBtn.textContent = 'Сохранить'
+      submitBtn.textContent = message;
     }
   }
 }

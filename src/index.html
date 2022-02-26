@@ -105,9 +105,10 @@
             aria-label="Закрыть"></button>
           <h2 class="modal__title">Обновить аватар</h2>
           <form class="modal__form modal__form_place_edit-avatar" name="avatar" novalidate>
-            <input type="url" class="modal__field modal__field_type_url-avatar" value="" name="avatar"
-              placeholder="Ссылка на аватар" required id="avatar">
-            <span class="modal__error avatar-error"></span>
+            <label class="modal__label">
+              <input type="url" class="modal__field modal__field_type_url-avatar" value="" name="avatar"
+                placeholder="Ссылка на аватар" required id="avatar">
+              <span class="modal__error avatar-error"></span>
             </label>
             <button type="submit" class="modal__button modal__button_place_edit-avatar button_loader">Сохранить</button>
           </form>

@@ -101,7 +101,7 @@ function submitFormNewCard() { // добавление новой карточк
     name: picName.value,
     link: picLink.value
   }
-  popupAddPhoto.alertLoading(true);
+  popupAddPhoto.alertLoading(true, 'Создать');
   api.addNewCard(picElement.name, picElement.link)
     .then(data => {
       cardList.addItem(createCard(data));
@@ -110,7 +110,7 @@ function submitFormNewCard() { // добавление новой карточк
       console.log(err);
     })
     .finally(() => {
-      this.alertLoading(false);
+      this.alertLoading(false, 'Создать');
     })
   btnSubmitAddCard.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAddCard.classList.add('modal__button_disabled');
@@ -127,7 +127,7 @@ function submitProfileForm() { //редактирование данных пр�
     username: nameInput.value,
     userjob: jobInput.value
   }
-  popupEditProfile.alertLoading(true);
+  popupEditProfile.alertLoading(true, 'Сохранить');
   api.setUserInfoApi(info.username, info.userjob)
     .then(data => {
       inputValues.setUserInfo(data);
@@ -136,12 +136,12 @@ function submitProfileForm() { //редактирование данных пр�
       console.log(err);
     })
     .finally(() => {
-      popupEditProfile.alertLoading(false);
+      popupEditProfile.alertLoading(false, 'Сохранить');
     })
 }
 
 function submitFormAvatar() { //редактировние аватара
-  popupEditAvatar.alertLoading(true);
+  popupEditAvatar.alertLoading(true, 'Сохранить');
   api.changeAvatar(avatarInput.value)
     .then(res => {
       inputValues.setUserInfo(res);
@@ -150,7 +150,7 @@ function submitFormAvatar() { //редактировние аватара
       console.log(err);
     })
     .finally(() => {
-      popupEditAvatar.alertLoading(false);
+      popupEditAvatar.alertLoading(false, 'Сохранить');
     })
   btnSubmitAvatar.setAttribute('disabled', true); // кнопка неактивна при открытии и пустых полях
   btnSubmitAvatar.classList.add('modal__button_disabled');
