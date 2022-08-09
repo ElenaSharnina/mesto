@@ -9,6 +9,14 @@
   <img src="src/images/2022-08-07_20-47-24.png" width="600"/>
 </div>
 
+## Посмотреть проект локально:
+Клонируйте репозиторий на свой локальный компьютер.
+В терминале введите `npm run start`
+чтобы запустить его в рабочем режиме.
+### Используемые версии:
+`npm: 8.1.2` `webpack: 5.68.0` `@babel/core: 7.17.2` `clean-webpack-plugin: 4.0.0` `html-webpack-plugin: 5.5.0`
+    `mini-css-extract-plugin: 2.5.3`
+    
 ## Используемые технологии:
 
 * Верстка на гридах и флексах;
@@ -34,3 +42,5 @@
 <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
 
 [Здесь можно посмотреть, как выглядит проект](https://elenasharnina.github.io/mesto/)
+
+
